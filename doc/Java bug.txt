@@ -1,0 +1,77 @@
+1.java.net.SocketException: Unrecognized Windows Sockets error: 0: JVM_Bind
+原因：服务器端口被占用
+解决办法
+一：更改服务器的端口号；
+二：关闭占用当前端口的进程
+下边介绍第二种方法
+1.首先进入命令行 查看端口是否被占用  
+使用命令： netstat -ano
+我的服务器的端口是443 
+此端口已被PID为3432的进程占用
+ 
+2.查看该PID为 3432 的进程
+使用命令：tasklist|findstr "3432"
+由于在解决问题时，我把PID为3432的进程已关掉，所以演示时，我用2784来做
+ 
+可以看出 PID为2784的进程是 ConnectifyService.exe
+第一种解决办法是：把ConnectifyService.exe进程关掉
+第二种解决办法是：直接通过任务管理器查看PID为3432的进程，然后关掉
+windows任务管理器->查看->选择列  选中PID 然后查看任务管理器，关掉PID为3432的进程
+2. Struts Problem Report
+Struts has detected an unhandled exception:
+原因：运行时遇到了不能识别的标识的错误，包括类名，路径名，方法名等
+解决方法：如下面遇到了该错误信息：
+首先显示
+Struts Problem Report
+Struts has detected an unhandled exception:
+可以发现是这类错误，然后下面继续有详细的错误提示：
+Unresolved compilation problems: Question cannot be resolved to a type questions cannot be resolved
+	Could not instantiate bean class [com.exam.student.actions.UploadAction]: 
+              Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: Question cannot be resolved to a type questions cannot be resolved
+由此可以发现应该是Question相关的变量questions的类型没有定义好，于是找到上面提示的UploadAction查看，发现
+private List questions;
+这里忘记了些List的类型，应该改成这样：
+private List<Question> questions;
+为了确保正确修改，重新部署项目，正常访问。
+遇到这类问题只能根据详细的提示信息查找相关代码仔细的检查了，包括看看有没有拼写错误，路径有没有写错，方法名，或是重启服务器，重新部署。
+3.ClassNotFoundException
+原因：
+1 所需要的支持类库放错了地方，并没有放在类路径(CLASSPATH环境变量)里面。
+2 使用了重复的类库，且版本不一致。导致低版本的被优先使用。
+3 类名错了，一般是使用Class.forName的时候，手工指定了类名的情况。
+4 没有导入纯JAVA驱动包。
+解决方法：
+1 确认你的类库在系统的CLASSPATH下面，如果是Tomcat，则可以放在tomcat/lib/目录下面。
+2 删除重复的类库，只保留最新的。
+3 尽可能不使用这种编译器无法为你检查的方式。
+4. java.lang.NoSuchMethodException
+原因：
+1.Action 类的方法被定义成 private 类型.
+2.Action 类继承了 ActionSupport 类,时 程序在访问其方法时,也会抛出上述异常.
+解决方法：
+Action 中的类一定要在定义成public 类型,且不能继承 ActionSupport 类.
+5.tomcat启动时报:IOException while loading persisted sessions: java.io.EOFException
+原因：
+EOFException表示输入过程中意外地到达文件尾或流尾的信号,导致从session中获取数据失败。
+这是由于tomcat上次非正常关闭时有一些活动session被持久化（表现为一些临时文件），在
+重启时，tomcat尝试去恢复这些session的持久化数据但又读取失败造成的。
+此异常不影响系统的使用。
+解决方法：找到tomcat的根目录。 这是我tomcat的根目录：E:\tomcat6_38\work\Catalina\localhost下找到你的项目点进去，然后你会看到一个sessions.ser文件,  把此文件删除即可tomcat即可正常的使用。
+6.java.lang.IllegalArgumentException：Document base D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core
+解决方法：找到了：Tomcat服务器下的conf\Catalina\localhost下有一个.xml的文件，就是报错的那个文件名。删除掉，重新启动。
+7.NullPointException
+原因：试图访问一个空对象时
+解决方法：通过断点确定哪个对象为空，再找到该对象没有实例化的原因
+ 8.NumberFormatException
+原因：程序员认为变量是数值“123”，但那实际内容可能是“abc”
+解决方法：
+根据控制台报的异常，找到出错的位置，看异常中数据是什么，确定是否有问题。
+9.ArrayIndexOutOfBoundsException
+原因：访问超过数组或集合最大索引值的数据
+解决问题：
+通过断点等方法，找到是否是循环超出了范围等原因。
+10.ClassCastException成
+原因：在集合中存入某对象，但是取出时却强转成其他对象
+解决方法：
+1.通过加断点的方法，查看集合存入的是什么对象，再和自己要强转的对象类型比较便知。
+2.泛型，已经限制了存入类型，就不会出现转换异常了。
