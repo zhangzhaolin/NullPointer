@@ -9,7 +9,12 @@ public class Page<T> {
 	private int totalPageNum;
 	private int totalCount;
 	//llalalalalall
-
+	public void WUwuw(){
+//		呵呵呵呵
+		int i =0;
+		int b =12;
+		int c =a+i;
+	}
 	public void setList(List<T> list) {
 		this.list = list;
 	}
