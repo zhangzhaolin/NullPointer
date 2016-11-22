@@ -15,6 +15,12 @@ public class Page<T> {
 		int b =12;
 		int c =a+i;
 	}
+	public void w(){
+//		呵呵呵呵
+		int i =0;
+		int b =12;
+		int c =a+i;
+	}
 	public void setList(List<T> list) {
 		this.list = list;
 	}
