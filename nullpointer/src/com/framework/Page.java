@@ -21,12 +21,6 @@ public class Page<T> {
 	private int totalPageNum;
 	private int totalCount;
 	//llalalalalall
-	public Page(){}
-	
-	public Page(int pageNum,int pageSize){
-		this.currentPageNum=pageNum;
-		this.pageSize=pageSize;
-	}
 	
 	public List<T> getList() {
 		return list;
