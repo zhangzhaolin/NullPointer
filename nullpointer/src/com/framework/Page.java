@@ -21,10 +21,7 @@ public class Page<T> {
 	private int totalPageNum;
 	private int totalCount;
 	//llalalalalall
-	
-	public List<T> getList() {
-		return list;
-	}
+
 	public void setList(List<T> list) {
 		this.list = list;
 	}
