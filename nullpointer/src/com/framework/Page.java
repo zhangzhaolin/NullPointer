@@ -20,7 +20,7 @@ public class Page<T> {
 	private int nextPageNum;
 	private int totalPageNum;
 	private int totalCount;
-	
+	//llalalalalall
 	public Page(){}
 	
 	public Page(int pageNum,int pageSize){
